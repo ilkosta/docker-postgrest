@@ -18,7 +18,12 @@ COPY 01prox /etc/apt/apt.conf.d/01prox
 RUN echo 'APT::Install-Recommends 0;' >> /etc/apt/apt.conf.d/01norecommends \
  && echo 'APT::Install-Suggests 0;' >> /etc/apt/apt.conf.d/01norecommends \
  && apt-get update \
- && apt-get install -y tar xz-utils wget libpq-dev
+ && apt-get install -y \
+	tar \ 
+	xz-utils \
+	wget \
+	libpq-dev \
+	libgmp10 
 
 ADD http://github.com/begriffs/postgrest/releases/download/v${POSTGREST_VERSION}/postgrest-${POSTGREST_VERSION}-ubuntu.tar.xz /tmp/postgrest-${POSTGREST_VERSION}-ubuntu.tar.xz
 RUN tar -xaf /tmp/postgrest-${POSTGREST_VERSION}-ubuntu.tar.xz \
