@@ -10,7 +10,7 @@ ENV POSTGREST_DBPASS  password
 ENV POSTGREST_SCHEMA  public
 ENV POSTGREST_ANONUSER postgres
 ENV POSTGREST_SECRET  vediamosefunziona
-
+ENV POSTGREST_PORT	3000
 
 
 COPY 01prox /etc/apt/apt.conf.d/01prox
@@ -33,7 +33,7 @@ RUN tar -xaf /tmp/postgrest-${POSTGREST_VERSION}-ubuntu.tar.xz \
 EXPOSE 3000
 
 CMD postgrest postgres://${POSTGREST_DBUSER}:${POSTGREST_DBPASS}@${POSTGREST_DBHOST}:${POSTGREST_DBPORT}/${POSTGREST_DBNAME} \
-              --port 3000 \
+              --port ${POSTGREST_PORT} \
               --schema ${POSTGREST_SCHEMA} \
               --anonymous ${POSTGREST_ANONUSER} \
               --pool 200  
